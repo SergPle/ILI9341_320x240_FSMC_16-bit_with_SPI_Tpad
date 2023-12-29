@@ -39,8 +39,8 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Inc/spi.h ../Core/Inc/usart.h ../USB_DEVICE/App/usb_device.h \
  ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h \
  ../USB_DEVICE/Target/usbd_conf.h ../Core/Inc/gpio.h ../Core/Inc/fsmc.h \
- ../Core/Inc/ili9341.h ../Core/Inc/colors.h ../Core/Inc/registers.h \
- ../Core/Inc/fonts.h ../Core/Inc/image.h
+ ../Core/Inc/tpad.h ../Core/Inc/ili9341.h ../Core/Inc/colors.h \
+ ../Core/Inc/registers.h ../Core/Inc/fonts.h ../Core/Inc/image.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -88,6 +88,7 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../USB_DEVICE/Target/usbd_conf.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/fsmc.h:
+../Core/Inc/tpad.h:
 ../Core/Inc/ili9341.h:
 ../Core/Inc/colors.h:
 ../Core/Inc/registers.h:

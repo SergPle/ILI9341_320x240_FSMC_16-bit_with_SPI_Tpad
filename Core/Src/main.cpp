@@ -24,6 +24,7 @@
 #include "usb_device.h"
 #include "gpio.h"
 #include "fsmc.h"
+#include "tpad.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -121,6 +122,7 @@ int main(void)
    lcdInit();
    int i = 1;
    lcdSetOrientation((lcdOrientationTypeDef)i);
+
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
   /* USER CODE END 2 */
