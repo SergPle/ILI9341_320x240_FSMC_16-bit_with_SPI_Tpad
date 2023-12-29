@@ -1604,18 +1604,22 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Core/Src/tpad.o
  .data          0x0000000000000000        0x0 ./Core/Src/tpad.o
  .bss           0x0000000000000000        0x0 ./Core/Src/tpad.o
+ .bss.Xcoord    0x0000000000000000        0x2 ./Core/Src/tpad.o
+ .bss.Ycoord    0x0000000000000000        0x2 ./Core/Src/tpad.o
+ .text._Z18TpadGetCoordinatesRtS_
+                0x0000000000000000       0xe8 ./Core/Src/tpad.o
  .text._Z8TpadInitv
                 0x0000000000000000       0x48 ./Core/Src/tpad.o
  .text._Z10TpadDeInitv
                 0x0000000000000000       0x28 ./Core/Src/tpad.o
  .text._Z10PenPresentv
                 0x0000000000000000       0x2c ./Core/Src/tpad.o
- .debug_info    0x0000000000000000      0x757 ./Core/Src/tpad.o
- .debug_abbrev  0x0000000000000000      0x1b1 ./Core/Src/tpad.o
+ .debug_info    0x0000000000000000      0x92a ./Core/Src/tpad.o
+ .debug_abbrev  0x0000000000000000      0x23d ./Core/Src/tpad.o
  .debug_aranges
-                0x0000000000000000       0x30 ./Core/Src/tpad.o
+                0x0000000000000000       0x38 ./Core/Src/tpad.o
  .debug_rnglists
-                0x0000000000000000       0x1f ./Core/Src/tpad.o
+                0x0000000000000000       0x26 ./Core/Src/tpad.o
  .debug_macro   0x0000000000000000      0x261 ./Core/Src/tpad.o
  .debug_macro   0x0000000000000000      0xb80 ./Core/Src/tpad.o
  .debug_macro   0x0000000000000000      0x2b3 ./Core/Src/tpad.o
@@ -1667,10 +1671,10 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x4c ./Core/Src/tpad.o
  .debug_macro   0x0000000000000000       0x16 ./Core/Src/tpad.o
  .debug_macro   0x0000000000000000       0x22 ./Core/Src/tpad.o
- .debug_line    0x0000000000000000      0x86d ./Core/Src/tpad.o
- .debug_str     0x0000000000000000    0xcd14e ./Core/Src/tpad.o
+ .debug_line    0x0000000000000000      0x94d ./Core/Src/tpad.o
+ .debug_str     0x0000000000000000    0xcd2af ./Core/Src/tpad.o
  .comment       0x0000000000000000       0x44 ./Core/Src/tpad.o
- .debug_frame   0x0000000000000000       0x64 ./Core/Src/tpad.o
+ .debug_frame   0x0000000000000000       0x88 ./Core/Src/tpad.o
  .ARM.attributes
                 0x0000000000000000       0x34 ./Core/Src/tpad.o
  .group         0x0000000000000000        0xc ./Core/Src/usart.o

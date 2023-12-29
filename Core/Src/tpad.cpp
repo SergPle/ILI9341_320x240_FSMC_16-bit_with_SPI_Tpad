@@ -12,7 +12,7 @@ void TpadInit(){
      Error_Handler();
    }
 
-    SPI_PORT.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
+    SPI_PORT.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_64;
 
     if(HAL_SPI_Init(&SPI_PORT) != HAL_OK){
 	Error_Handler();
