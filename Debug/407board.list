@@ -1660,6 +1660,7 @@ void lcdPrintf(const char *fmt, ...)
  8000d38:	b085      	sub	sp, #20
  8000d3a:	af02      	add	r7, sp, #8
 	static char buf[256];
+
 	char *p;
 	va_list lst;
 

@@ -1,0 +1,3 @@
+../Core/Src/tpad.cpp:9:6:void TpadInit()	8	static
+../Core/Src/tpad.cpp:22:6:void TpadDeInit()	8	static
+../Core/Src/tpad.cpp:30:6:bool PenPresent()	8	static

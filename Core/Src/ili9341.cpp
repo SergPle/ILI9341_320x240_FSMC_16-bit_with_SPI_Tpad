@@ -825,6 +825,7 @@ void lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t
 void lcdPrintf(const char *fmt, ...)
 {
 	static char buf[256];
+
 	char *p;
 	va_list lst;
 
