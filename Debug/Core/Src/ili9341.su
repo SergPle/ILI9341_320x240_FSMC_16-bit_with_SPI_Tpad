@@ -1,0 +1,50 @@
+../Core/Src/ili9341.cpp:46:6:void lcdInit()	16	static
+../Core/Src/ili9341.cpp:208:6:void lcdTest()	24	static
+../Core/Src/ili9341.cpp:230:6:void lcdFillRGB(uint16_t)	24	static
+../Core/Src/ili9341.cpp:249:6:void lcdDrawPixel(uint16_t, uint16_t, uint16_t)	16	static
+../Core/Src/ili9341.cpp:259:6:void lcdDrawHLine(uint16_t, uint16_t, uint16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:288:6:void lcdDrawVLine(uint16_t, uint16_t, uint16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:329:6:void lcdDrawLine(int16_t, int16_t, int16_t, int16_t, uint16_t)	48	static
+../Core/Src/ili9341.cpp:392:6:void lcdDrawRect(int16_t, int16_t, int16_t, int16_t, uint16_t)	24	static
+../Core/Src/ili9341.cpp:412:6:void lcdDrawRoundRect(int16_t, int16_t, int16_t, int16_t, int16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:438:6:void lcdDrawCircleHelper(int16_t, int16_t, int16_t, uint8_t, uint16_t)	40	static
+../Core/Src/ili9341.cpp:490:6:void lcdDrawCircle(int16_t, int16_t, int16_t, uint16_t)	40	static
+../Core/Src/ili9341.cpp:538:6:void lcdDrawTriangle(int16_t, int16_t, int16_t, int16_t, int16_t, int16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:555:6:void lcdFillCircle(int16_t, int16_t, int16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:573:6:void lcdFillCircleHelper(int16_t, int16_t, int16_t, uint8_t, int16_t, uint16_t)	40	static
+../Core/Src/ili9341.cpp:617:6:void lcdFillRect(int16_t, int16_t, int16_t, int16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:642:6:void lcdFillRoundRect(int16_t, int16_t, int16_t, int16_t, int16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:665:6:void lcdFillTriangle(int16_t, int16_t, int16_t, int16_t, int16_t, int16_t, uint16_t)	72	static
+../Core/Src/ili9341.cpp:748:6:void lcdDrawImage(uint16_t, uint16_t, const sImage*)	24	static
+../Core/Src/ili9341.cpp:760:6:void lcdHome()	8	static
+../Core/Src/ili9341.cpp:779:6:void lcdDrawChar(int16_t, int16_t, unsigned char, uint16_t, uint16_t)	32	static
+../Core/Src/ili9341.cpp:825:6:)	32	static
+../Core/Src/ili9341.cpp:878:6:void lcdSetTextFont(sFONT*)	16	static
+../Core/Src/ili9341.cpp:891:6:void lcdSetTextColor(uint16_t, uint16_t)	16	static
+../Core/Src/ili9341.cpp:904:6:void lcdSetTextWrap(uint8_t)	16	static
+../Core/Src/ili9341.cpp:909:6:void lcdSetOrientation(lcdOrientationTypeDef)	16	static
+../Core/Src/ili9341.cpp:944:6:void lcdSetCursor(short unsigned int, short unsigned int)	16	static
+../Core/Src/ili9341.cpp:961:6:void lcdSetWindow(short unsigned int, short unsigned int, short unsigned int, short unsigned int)	24	static
+../Core/Src/ili9341.cpp:987:6:void lcdBacklightOff()	8	static
+../Core/Src/ili9341.cpp:992:6:void lcdBacklightOn()	8	static
+../Core/Src/ili9341.cpp:997:6:void lcdInversionOff()	8	static
+../Core/Src/ili9341.cpp:1002:6:void lcdInversionOn()	8	static
+../Core/Src/ili9341.cpp:1007:6:void lcdDisplayOff()	8	static
+../Core/Src/ili9341.cpp:1013:6:void lcdDisplayOn()	8	static
+../Core/Src/ili9341.cpp:1019:6:void lcdTearingOff()	8	static
+../Core/Src/ili9341.cpp:1024:6:void lcdTearingOn(bool)	16	static
+../Core/Src/ili9341.cpp:1030:10:uint16_t lcdGetWidth()	4	static
+../Core/Src/ili9341.cpp:1035:10:uint16_t lcdGetHeight()	4	static
+../Core/Src/ili9341.cpp:1040:10:uint16_t lcdGetControllerID()	16	static
+../Core/Src/ili9341.cpp:1051:23:lcdOrientationTypeDef lcdGetOrientation()	4	static
+../Core/Src/ili9341.cpp:1056:8:sFONT* lcdGetTextFont()	4	static
+../Core/Src/ili9341.cpp:1061:22:lcdPropertiesTypeDef lcdGetProperties()	16	static
+../Core/Src/ili9341.cpp:1074:10:uint16_t lcdReadPixel(uint16_t, uint16_t)	24	static
+../Core/Src/ili9341.cpp:1098:10:uint16_t lcdColor565(uint8_t, uint8_t, uint8_t)	16	static
+../Core/Src/ili9341.cpp:1105:13:void lcdDrawPixels(uint16_t, uint16_t, uint16_t*, uint32_t)	32	static
+../Core/Src/ili9341.cpp:1119:13:void lcdDrawPixels(uint16_t, uint16_t, uint16_t*)	24	static
+../Core/Src/ili9341.cpp:1133:13:void lcdReset()	8	static
+../Core/Src/ili9341.cpp:1140:13:void lcdWriteCommand(unsigned char)	16	static
+../Core/Src/ili9341.cpp:1146:13:void lcdWriteData(short unsigned int)	16	static
+../Core/Src/ili9341.cpp:1151:23:short unsigned int lcdReadData()	4	static
+../Core/Src/ili9341.cpp:1156:22:unsigned char lcdBuildMemoryAccessControlConfig(bool, bool, bool, bool, bool, bool)	24	static

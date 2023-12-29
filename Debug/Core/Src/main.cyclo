@@ -1,0 +1,17 @@
+../Core/Src/main.cpp:84:5:int main()	1
+../Core/Src/main.cpp:156:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:200:6:void demoLCD(int)	1
+../Core/Src/main.cpp:294:15:long unsigned int testFillScreen()	1
+../Core/Src/main.cpp:334:15:long unsigned int testText()	1
+../Core/Src/main.cpp:366:15:long unsigned int testLines(uint16_t)	9
+../Core/Src/main.cpp:426:15:long unsigned int testFastLines(uint16_t, uint16_t)	3
+../Core/Src/main.cpp:439:15:long unsigned int testRects(uint16_t)	3
+../Core/Src/main.cpp:458:15:long unsigned int testFilledRects(uint16_t, uint16_t)	3
+../Core/Src/main.cpp:481:15:long unsigned int testFilledCircles(uint8_t, uint16_t)	3
+../Core/Src/main.cpp:499:15:long unsigned int testCircles(uint8_t, uint16_t)	3
+../Core/Src/main.cpp:520:15:long unsigned int testTriangles()	3
+../Core/Src/main.cpp:541:15:long unsigned int testFilledTriangles()	3
+../Core/Src/main.cpp:559:15:long unsigned int testRoundRects()	3
+../Core/Src/main.cpp:578:15:long unsigned int testFilledRoundRects()	4
+../Core/Src/main.cpp:596:15:long unsigned int testDrawImage()	4
+../Core/Src/main.cpp:619:6:void Error_Handler()	1
