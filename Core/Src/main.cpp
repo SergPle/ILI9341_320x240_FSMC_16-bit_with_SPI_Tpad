@@ -25,10 +25,10 @@
 #include "gpio.h"
 #include "fsmc.h"
 #include "tpad.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ili9341.h"
+#include <stdbool.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,8 +49,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-  RTC_TimeTypeDef time;
-  extern RTC_HandleTypeDef hrtc;
+RTC_TimeTypeDef time;
+extern RTC_HandleTypeDef hrtc;
+uint16_t penX, penY;
 
 /* USER CODE END PV */
 
@@ -122,7 +123,8 @@ int main(void)
    lcdInit();
    int i = 1;
    lcdSetOrientation((lcdOrientationTypeDef)i);
-
+   TpadInit();
+   HAL_Delay(100);
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
   /* USER CODE END 2 */
@@ -132,7 +134,12 @@ int main(void)
 
   while (1)
   {
-      	//uint16_t _delay = 100;
+      	if(TpadGetCoordinates(penX, penY)){
+      		lcdSetTextFont(&Font16);
+      	      	lcdSetCursor(1 , 1);
+      	      	lcdSetTextColor(COLOR_GREENYELLOW, COLOR_BLACK);
+      	      	lcdPrintf("PEN: X %5i  Y %5i", penX, penY);
+      	}
       	unsigned long t = testText();
       		lcdSetTextFont(&Font16);
       		lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
@@ -344,7 +351,7 @@ unsigned long testText()
 //	lcdPrintf("Hello World!\r\n\n\n");
 	lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
 	lcdSetTextFont(&Font24);
-	lcdPrintf("%02i : %02i : %02i \n", time.Hours, time.Minutes, time.Seconds);
+	lcdPrintf("%02i : %02i : %02i ", time.Hours, time.Minutes, time.Seconds);
 //	lcdSetTextColor(COLOR_RED, COLOR_BLACK);
 //	lcdSetTextFont(&Font16);
 //	lcdPrintf("%#X\r\n", 0xDEADBEEF);

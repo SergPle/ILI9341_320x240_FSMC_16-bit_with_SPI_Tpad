@@ -69,6 +69,8 @@ void Error_Handler(void);
 #define PEN_PRESENT_GPIO_Port GPIOC
 #define LCD_BL_Pin GPIO_PIN_1
 #define LCD_BL_GPIO_Port GPIOB
+#define TPAD_EN_Pin GPIO_PIN_12
+#define TPAD_EN_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

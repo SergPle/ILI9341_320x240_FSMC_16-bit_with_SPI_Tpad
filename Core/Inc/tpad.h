@@ -24,7 +24,7 @@ void TpadInit();
 
 void TpadDeInit();
 
-bool PenPresent();
+bool TpadPenPresent();
 
 bool TpadGetCoordinates(uint16_t& Xcoord, uint16_t& Ycoord);
 
