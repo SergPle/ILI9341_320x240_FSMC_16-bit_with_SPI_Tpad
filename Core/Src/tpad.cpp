@@ -5,6 +5,7 @@
  *      Author: Сергей
  */
 #include "tpad.h"
+#include "stm32f4xx_hal.h"
 
 void TpadInit(){
   HAL_GPIO_WritePin(TPAD_EN_GPIO_Port, TPAD_EN_Pin, GPIO_PIN_SET );

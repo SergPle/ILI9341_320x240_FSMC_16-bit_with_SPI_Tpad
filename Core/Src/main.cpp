@@ -18,16 +18,17 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "rtc.h"
-#include "sdio.h"
 #include "spi.h"
 #include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
 #include "fsmc.h"
-#include "tpad.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "ili9341.h"
+#include "ILI9341_Touchscreen.h"
+// #include "tpad.h"
 #include <stdbool.h>
 /* USER CODE END Includes */
 
@@ -109,9 +110,7 @@ int main(void)
   MX_GPIO_Init();
   MX_FSMC_Init();
   MX_RTC_Init();
-  // MX_SDIO_SD_Init();
   MX_SPI1_Init();
-  MX_SPI2_Init();
   MX_USART1_UART_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
@@ -123,7 +122,7 @@ int main(void)
    lcdInit();
    int i = 1;
    lcdSetOrientation((lcdOrientationTypeDef)i);
-   TpadInit();
+   // TpadInit();
    HAL_Delay(100);
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
@@ -131,20 +130,33 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-
+bool refil = false;
   while (1)
   {
-      	if(TpadGetCoordinates(penX, penY)){
+
+//      	if(TpadGetCoordinates(penX, penY)){
+//      	}
+
+      if(TP_Touchpad_Pressed() == 1){
+	  uint16_t Coordinates[2] ={0};
+	  refil = true;
+	  TP_Read_Coordinates(Coordinates);
       		lcdSetTextFont(&Font16);
       	      	lcdSetCursor(1 , 1);
       	      	lcdSetTextColor(COLOR_GREENYELLOW, COLOR_BLACK);
-      	      	lcdPrintf("PEN: X %5i  Y %5i", penX, penY);
-      	}
-      	unsigned long t = testText();
-      		lcdSetTextFont(&Font16);
-      		lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
-      		lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
-      		lcdPrintf("Time: %4lu ms", t);
+      	      	lcdPrintf("PEN: X %5i  Y %5i", Coordinates[0], Coordinates[1]);
+
+      } else {
+	  if (refil){
+	  refil = false;
+	  lcdFillRGB(COLOR_BLACK);
+	  }
+      }
+    unsigned long t = testText();
+    lcdSetTextFont(&Font16);
+    lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
+    lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
+    lcdPrintf("Time: %4lu ms", t);
       		// HAL_Delay(_delay);
 
 //      demoLCD(i);
