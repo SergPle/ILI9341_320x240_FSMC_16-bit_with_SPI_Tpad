@@ -52,7 +52,7 @@
 //				MISO
 //
 //
-//	-Touchpad library bitbangs SPI interface and only requires basic GPIOs.
+//	-Touch pad library bit bangs SPI interface and only requires basic GPIOs.
 //	-Setting GPIOs as FREQ_VERY_HIGH Recommended
 //	-If using different layout you will have to Re-Map X and Y coordinates of the Screen
 //	-N_OF_POSITION_SAMPLES makes location output less noisy but increases reading time. Increase and decrease to your liking
@@ -96,8 +96,8 @@ if(TP_Touchpad_Pressed())
 #define TP_IRQ_PORT		GPIOC
 #define TP_IRQ_PIN		T_PEN_Pin
 
-#define CMD_RDY             			0X90
-#define CMD_RDX             			0XD0
+#define CMD_RDX             			0X90
+#define CMD_RDY             			0XD0
 
 //RETURN VALUES FOR TP_Touchpad_Pressed 
 #define TOUCHPAD_NOT_PRESSED			0
@@ -108,16 +108,16 @@ if(TP_Touchpad_Pressed())
 #define TOUCHPAD_DATA_NOISY			0
 
 //HARDCODED CALIBRATION, CHANGE IF REQUIRED
-#define X_OFFSET				13
+#define X_OFFSET				15
 #define Y_OFFSET				15
-#define X_MAGNITUDE				1.16
-#define Y_MAGNITUDE				1.16
+#define X_MAGNITUDE				1.15
+#define Y_MAGNITUDE				1.15
 
 //CONVERTING 16bit Value to Screen coordinates
 // 65535/273 = 240!
 // 65535/204 = 320!
-#define X_TRANSLATION				273
-#define Y_TRANSLATION				204
+#define X_TRANSLATION				204
+#define Y_TRANSLATION				273
 
 //In order to increase accuracy of location reads library samples
 //N_OF_POSITION_SAMPLES numbers of locations and averages them
@@ -127,8 +127,8 @@ if(TP_Touchpad_Pressed())
 #define N_OF_POSITION_SAMPLES	 	64
 
 
-//Read coordinates of touchscreen press. Position[0] = X, Position[1] = Y
-uint8_t TP_Read_Coordinates(uint16_t Coordinates[2]);
+//Read coordinates of touchscreen press. [0] = X, [1] = Y, [2] = RawX, [3] = RawY
+uint8_t TP_Read_Coordinates(uint16_t Coordinates[]);
 
 //Check if Touchpad was pressed. Returns TOUCHPAD_PRESSED (1) or TOUCHPAD_NOT_PRESSED (0)
 uint8_t TP_Touchpad_Pressed();

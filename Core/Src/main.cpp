@@ -138,13 +138,13 @@ bool refil = false;
 //      	}
 
       if(TP_Touchpad_Pressed() == 1){
-	  uint16_t Coordinates[2] ={0};
+	  uint16_t Coord[4] ={0};
 	  refil = true;
-	  TP_Read_Coordinates(Coordinates);
+	  TP_Read_Coordinates(Coord);
       		lcdSetTextFont(&Font16);
       	      	lcdSetCursor(1 , 1);
       	      	lcdSetTextColor(COLOR_GREENYELLOW, COLOR_BLACK);
-      	      	lcdPrintf("PEN: X %5i  Y %5i", Coordinates[0], Coordinates[1]);
+      	      	lcdPrintf("PEN: X %5i Y %5i\n \t X %5i Y %5i", Coord[0], Coord[1], Coord[2], Coord[3]);
 
       } else {
 	  if (refil){

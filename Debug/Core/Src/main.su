@@ -1,4 +1,4 @@
-../Core/Src/main.cpp:87:5:int main()	32	static
+../Core/Src/main.cpp:87:5:int main()	48	static
 ../Core/Src/main.cpp:177:6:void SystemClock_Config()	88	static
 ../Core/Src/main.cpp:221:6:void demoLCD(int)	32	static
 ../Core/Src/main.cpp:315:15:long unsigned int testFillScreen()	24	static
