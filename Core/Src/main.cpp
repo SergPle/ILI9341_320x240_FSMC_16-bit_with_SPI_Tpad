@@ -126,6 +126,14 @@ int main(void)
    HAL_Delay(100);
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
+   lcdSetTextFont(&Font24);
+       lcdSetCursor(120,5);
+       lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
+       lcdPrintf("CALIBRATION!");
+       while(! TP_Touchpad_Pressed());
+       TP_calibration();
+   lcdFillRGB(COLOR_BLACK);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */

@@ -84,10 +84,10 @@ if(TP_Touchpad_Pressed())
 
 //INITIAL HARDCODED CALIBRATION, CHANGE IF REQUIRED
 
-volatile uint16_t X_OFFSET = 15;
-volatile uint16_t Y_OFFSET = 15;
-volatile float X_MAGNITUDE = 1.15;
-volatile float Y_MAGNITUDE = 1.15;
+volatile uint16_t X_OFFSET = 4270;
+volatile uint16_t Y_OFFSET = 3855;
+volatile float X_MAGNITUDE = 0x433F;
+volatile float Y_MAGNITUDE = 0x436E00F;
 
 //Internal Touchpad command, do not call directly
 static uint16_t TP_Read(void)
