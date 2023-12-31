@@ -961,17 +961,6 @@ void lcdSetCursor(unsigned short x, unsigned short y)
  */
 void lcdSetWindow(unsigned short x0, unsigned short y0, unsigned short x1, unsigned short y1)
 {
-//  lcdWriteCommand(ILI9341_COLADDRSET);
-//  lcdWriteData((x0 >> 8) & 0xFF);
-//  lcdWriteData(x0 & 0xFF);
-//  lcdWriteData((x1 >> 8) & 0xFF);
-//  lcdWriteData(x1 & 0xFF);
-//  lcdWriteCommand(ILI9341_PAGEADDRSET);
-//  lcdWriteData((y0 >> 8) & 0xFF);
-//  lcdWriteData(y0 & 0xFF);
-//  lcdWriteData((y1 >> 8) & 0xFF);
-//  lcdWriteData(y1 & 0xFF);
-//  lcdWriteCommand(ILI9341_MEMORYWRITE);
   lcdWriteCommand(ILI9341_COLADDRSET);
   lcdWriteData(x0 >> 8) ;
   lcdWriteData(x0 );

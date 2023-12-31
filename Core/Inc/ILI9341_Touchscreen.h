@@ -80,6 +80,9 @@ if(TP_Touchpad_Pressed())
 #include "main.h"
 #include "stm32f4xx_hal.h"
 
+#define CALIBRATION_OK			1
+#define CALIBRATION_FAILS		0
+
 
 #define TP_CLK_PORT		GPIOB
 #define TP_CLK_PIN		T_CLK_Pin
@@ -107,17 +110,16 @@ if(TP_Touchpad_Pressed())
 #define TOUCHPAD_DATA_OK			1
 #define TOUCHPAD_DATA_NOISY			0
 
-//HARDCODED CALIBRATION, CHANGE IF REQUIRED
-#define X_OFFSET				15
-#define Y_OFFSET				15
-#define X_MAGNITUDE				1.15
-#define Y_MAGNITUDE				1.15
 
 //CONVERTING 16bit Value to Screen coordinates
 // 65535/273 = 240!
 // 65535/204 = 320!
-#define X_TRANSLATION				204
-#define Y_TRANSLATION				273
+#define X_TRANSLATION				273
+#define Y_TRANSLATION				204
+
+// Touch pad size
+#define X_SIZE 					320
+#define Y_SIZE 					240
 
 //In order to increase accuracy of location reads library samples
 //N_OF_POSITION_SAMPLES numbers of locations and averages them
@@ -126,11 +128,16 @@ if(TP_Touchpad_Pressed())
 
 #define N_OF_POSITION_SAMPLES	 	64
 
+// Time to calibration of touch pad in ms
+#define CALIBRATION_TIME		5000 // ms
 
 //Read coordinates of touchscreen press. [0] = X, [1] = Y, [2] = RawX, [3] = RawY
 uint8_t TP_Read_Coordinates(uint16_t Coordinates[]);
 
 //Check if Touchpad was pressed. Returns TOUCHPAD_PRESSED (1) or TOUCHPAD_NOT_PRESSED (0)
 uint8_t TP_Touchpad_Pressed();
+
+// Touch pad calibration. Lets move stilus from upper left corner of screen to down right corner few time in CALIBRATION_TIME millisecond.
+uint8_t TP_calibration();
 
 #endif

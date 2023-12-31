@@ -82,6 +82,13 @@ if(TP_Touchpad_Pressed())
 #include "ILI9341_Touchscreen.h"
 #include "stm32f4xx_hal.h"
 
+//INITIAL HARDCODED CALIBRATION, CHANGE IF REQUIRED
+
+volatile uint16_t X_OFFSET = 15;
+volatile uint16_t Y_OFFSET = 15;
+volatile float X_MAGNITUDE = 1.15;
+volatile float Y_MAGNITUDE = 1.15;
+
 //Internal Touchpad command, do not call directly
 static uint16_t TP_Read(void)
 {
@@ -177,14 +184,11 @@ uint8_t TP_Read_Coordinates(uint16_t Coordinates[])
 	    rawy = calculating_y;
 	    Coordinates[3] = rawy;
 		
-	    rawx *= -1;
-	    rawy *= -1;
-		
 		//CONVERTING 16bit Value to Screen coordinates
 		// 65535/273 = 240!
 		// 65535/204 = 320!
-	    Coordinates[0] = ((240 - (rawx/X_TRANSLATION)) - X_OFFSET)*X_MAGNITUDE;
-	    Coordinates[1] = ((rawy/Y_TRANSLATION)- Y_OFFSET)*Y_MAGNITUDE;
+	    Coordinates[0] = (rawx - X_OFFSET) / X_MAGNITUDE;
+	    Coordinates[1] = (rawy - Y_OFFSET) / Y_MAGNITUDE;
 		
 		return TOUCHPAD_DATA_OK;			
 		}
@@ -208,4 +212,33 @@ uint8_t TP_Touchpad_Pressed()
 	}
 }
 
+// Touch pad calibration. Lets move stilus from upper left corner of screen to down right corner few time in CALIBRATION_TIME millisecond.
+uint8_t TP_calibration()
+{
+  uint16_t rawCoord[4];
+  uint16_t Xmin = 0xFFFF;
+  uint16_t Ymin = 0xFFFF;
+  uint16_t Xmax = 0;
+  uint16_t Ymax = 0;
+
+  uint32_t end_time = HAL_GetTick() + CALIBRATION_TIME;
+  while (end_time > HAL_GetTick())
+    {
+      TP_Read_Coordinates(rawCoord);
+      if (rawCoord[2] < Xmin) { Xmin = rawCoord[2]; }
+      if (rawCoord[2] > Xmax) { Xmax = rawCoord[2]; }
+      if (rawCoord[3] < Ymin) { Ymin = rawCoord[3]; }
+      if (rawCoord[3] > Ymax) { Ymax = rawCoord[3]; }
+    }
+  if ((Xmin < Xmax) && (Ymin < Ymax))
+  {
+      X_OFFSET = Xmin;
+      Y_OFFSET = Ymin;
+      X_MAGNITUDE = (Xmax - Xmin) / X_SIZE;
+      Y_MAGNITUDE = (Ymax- Ymin) /  Y_SIZE;
+
+      return CALIBRATION_OK;
+  }
+  return CALIBRATION_FAILS;
+}
 
