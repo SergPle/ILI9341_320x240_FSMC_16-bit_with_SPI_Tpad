@@ -212,7 +212,7 @@ uint8_t TP_Touchpad_Pressed()
 	}
 }
 
-// Touch pad calibration. Lets move stilus from upper left corner of screen to down right corner few time in CALIBRATION_TIME millisecond.
+// Touch pad calibration. Lets move stilus from upper left corner of screen to down right corner few time. You have CALIBRATION_TIME millisecond)).
 uint8_t TP_calibration()
 {
   uint16_t rawCoord[4];
@@ -224,11 +224,13 @@ uint8_t TP_calibration()
   uint32_t end_time = HAL_GetTick() + CALIBRATION_TIME;
   while (end_time > HAL_GetTick())
     {
-      TP_Read_Coordinates(rawCoord);
-      if (rawCoord[2] < Xmin) { Xmin = rawCoord[2]; }
-      if (rawCoord[2] > Xmax) { Xmax = rawCoord[2]; }
-      if (rawCoord[3] < Ymin) { Ymin = rawCoord[3]; }
-      if (rawCoord[3] > Ymax) { Ymax = rawCoord[3]; }
+      if (TP_Read_Coordinates(rawCoord))
+	{
+	  if (rawCoord[2] < Xmin) { Xmin = rawCoord[2]; }
+	  if (rawCoord[2] > Xmax) { Xmax = rawCoord[2]; }
+	  if (rawCoord[3] < Ymin) { Ymin = rawCoord[3]; }
+	  if (rawCoord[3] > Ymax) { Ymax = rawCoord[3]; }
+	}
     }
   if ((Xmin < Xmax) && (Ymin < Ymax))
   {
