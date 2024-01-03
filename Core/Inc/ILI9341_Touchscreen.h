@@ -1,6 +1,9 @@
 //	MIT License
 //
-//	Copyright (c) 2017 Matej Artnak
+//	Sergey Plekhanov Copyright (c)2024
+//
+//	This library is based on code:
+//	Matej Artnak Copyright (c) 2017 with optimizations and additions
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +25,8 @@
 //
 //
 //-----------------------------------
-//	 Touch screen of ILI9341 library for STM32
+//	Resistive  touch screen of ILI9341 library for STM32
 //-----------------------------------
-//
-//	Very simple Touch screen library for ILI9341.
-//	Only basic reading of position. No runtime calibration, No prediction, basic noise removal. Simple but stupid.
-//	Basic hard codes calibration values saved in .h file
 //
 //	Library is written for STM32 HAL library and supports STM32CUBEMX. To use the library with Cube software
 //	you need to tick the box that generates peripheral initialization code in their own respective .c and .h file
@@ -40,15 +39,16 @@
 //	-If using MCUs other than STM32F4 you will have to change the #include "stm32f4xx_hal.h" in the ILI9341_Touchscreen.h to your respective .h file
 //	-define GPIO inputs and outputs then map the Pins and Ports inside the ILI9341_Touchscreen.h
 //	-Library does not require any initialization calls apart from GPIO initialization. Initialize GPIOs before calling library functions!
+//	-Perform calibration the first time you turn it on and you can save this data (e.g. in flash RAM)
 //
 //		Touchpad GPIO defines
 //			Outputs:
 //				CLK
 //				MOSI
-//				CS
+//				CS -chip select
 //
 //			Inputs:
-//				IRQ
+//				IRQ - touch present
 //				MISO
 //
 //
@@ -110,13 +110,6 @@ if(TP_Touchpad_Pressed())
 #define TOUCHPAD_DATA_OK			1
 #define TOUCHPAD_DATA_NOISY			0
 
-
-//CONVERTING 16bit Value to Screen coordinates
-// 65535/273 = 240!
-// 65535/204 = 320!
-#define X_TRANSLATION				273
-#define Y_TRANSLATION				204
-
 // Touch pad size
 #define X_SIZE 					320
 #define Y_SIZE 					240
@@ -126,7 +119,7 @@ if(TP_Touchpad_Pressed())
 //If library runs too slow decrease NO_OF_POSITION_SAMPLES, but
 //expect inreasingly noisy or incorrect locations returned
 
-#define N_OF_POSITION_SAMPLES	 	64
+#define N_OF_POSITION_SAMPLES	 	128
 
 // Time to calibration of touch pad in ms
 #define CALIBRATION_TIME		5000 // ms

@@ -1,9 +1,15 @@
 /*
+ * Library for screen based
  * ili9341.h
+ * with 16 bit FSMC
+ * for STM32 series controller
  *
- *  Created on: 22 ���. 2018 �.
- *  Author: Andriy Honcharenko
- *  Version 1.1 date: 24.09.2019
+ *  Created on: 03/01/2024
+ *  Author: Sergey Plekhanov
+ *
+ *  Code Based of: Andriy Honcharenko
+ *  Version 1.1
+ *  I made it four time faster when outputting text)) and few minor optimization
  */
 
 #ifndef ILI9341_H_
@@ -16,17 +22,16 @@
 #include "image.h"
 #include <stdbool.h>
 
-#define LCD_BL_ON() HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_SET)
-
+#define LCD_BL_ON()  HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_SET)
 #define LCD_BL_OFF() HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_RESET)
 
 #define LCD_BASE0        		((uint32_t)0x60000000)
-#define LCD_BASE1        		((uint32_t)0x60080000)
+#define LCD_BASE1        		((uint32_t)0x60080000) // for A18 bit
 
 #define LCD_CmdWrite(command)	*(volatile uint16_t *) (LCD_BASE0) = (command)
-#define LCD_DataWrite(data)		*(volatile uint16_t *) (LCD_BASE1) = (data)
-#define	LCD_StatusRead()		*(volatile uint16_t *) (LCD_BASE0) //if use read  Mcu interface DB0~DB15 needs increase pull high
-#define	LCD_DataRead()			*(volatile uint16_t *) (LCD_BASE1) //if use read  Mcu interface DB0~DB15 needs increase pull high
+#define LCD_DataWrite(data)	*(volatile uint16_t *) (LCD_BASE1) = (data)
+#define	LCD_StatusRead()	*(volatile uint16_t *) (LCD_BASE0) //if use read  Mcu interface DB0~DB15 needs increase pull high
+#define	LCD_DataRead()		*(volatile uint16_t *) (LCD_BASE1) //if use read  Mcu interface DB0~DB15 needs increase pull high
 
 #define swap(a, b) { int16_t t = a; a = b; b = t; }
 
@@ -47,7 +52,7 @@ typedef enum
 } lcdOrientationTypeDef;
 
 /**
-  * @brief  Draw Properties structures definition
+  *   Draw Properties structures definition
   */
 typedef struct
 {
@@ -68,10 +73,12 @@ typedef struct
 {
   uint16_t				width;         // LCD width in pixels (default orientation)
   uint16_t				height;        // LCD height in pixels (default orientation)
-  lcdOrientationTypeDef	orientation;   // Whether the LCD orientation can be modified
+  lcdOrientationTypeDef			orientation;   // Whether the LCD orientation can be modified
   bool					touchscreen;   // Whether the LCD has a touch screen
   bool					hwscrolling;   // Whether the LCD support HW scrolling
 } lcdPropertiesTypeDef;
+
+
 
 void					lcdInit(void);
 void              			lcdTest(void);

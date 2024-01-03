@@ -1,8 +1,8 @@
-	/*
- * ili9341.c
+/*
+ * ili9341.cpp
  *
- *  Created on: 22 ���. 2018 �.
- *      Author: Andriy Honcharenko
+ *  Sergey Plekhanov 2024,
+ *  base of code Andriy Honcharenko (c)
  */
 #include <stdlib.h>
 #include <stdarg.h>
@@ -15,8 +15,8 @@ enum {
 } MemoryAccessControlRefreshOrder;
 
 enum {
-	MemoryAccessControlColorOrderRGB,
-	MemoryAccessControlColorOrderBGR
+  MemoryAccessControlColorOrderRGB,
+  MemoryAccessControlColorOrderBGR
 } MemoryAccessControlColorOrder;
 
 static lcdPropertiesTypeDef  lcdProperties = { ILI9341_PIXEL_WIDTH, ILI9341_PIXEL_HEIGHT, LCD_ORIENTATION_PORTRAIT,true, true };
@@ -31,8 +31,8 @@ static unsigned char lcdLandscapeMirrorConfig = 0;
 static void			lcdDrawPixels(uint16_t x, uint16_t y, uint16_t *data, uint32_t dataLength);
 static void        		lcdReset(void);
 static void        		lcdWriteCommand(unsigned char command);
-static void             lcdWriteData(unsigned short data);
-static unsigned short	lcdReadData(void);
+static void             	lcdWriteData(unsigned short data);
+static unsigned short		lcdReadData(void);
 
 static unsigned char    lcdBuildMemoryAccessControlConfig(
                                 bool rowAddressOrder,
@@ -46,34 +46,34 @@ static unsigned char    lcdBuildMemoryAccessControlConfig(
 void lcdInit(void)
 {
   lcdPortraitConfig = lcdBuildMemoryAccessControlConfig(
-                                                    MemoryAccessControlNormalOrder,		// rowAddressOrder
+                                                    MemoryAccessControlNormalOrder,	// rowAddressOrder
                                                     MemoryAccessControlReverseOrder,	// columnAddressOrder
-                                                    MemoryAccessControlNormalOrder,		// rowColumnExchange
-                                                    MemoryAccessControlNormalOrder,		// verticalRefreshOrder
+                                                    MemoryAccessControlNormalOrder,	// rowColumnExchange
+                                                    MemoryAccessControlNormalOrder,	// verticalRefreshOrder
                                                     MemoryAccessControlColorOrderBGR,	// colorOrder
                                                     MemoryAccessControlNormalOrder);	// horizontalRefreshOrder
 
   lcdLandscapeConfig = lcdBuildMemoryAccessControlConfig(
-                                                    MemoryAccessControlNormalOrder,		// rowAddressOrder
-                                                    MemoryAccessControlNormalOrder,		// columnAddressOrder
+                                                    MemoryAccessControlNormalOrder,	// rowAddressOrder
+                                                    MemoryAccessControlNormalOrder,	// columnAddressOrder
                                                     MemoryAccessControlReverseOrder,	// rowColumnExchange
-                                                    MemoryAccessControlNormalOrder,		// verticalRefreshOrder
+                                                    MemoryAccessControlNormalOrder,	// verticalRefreshOrder
                                                     MemoryAccessControlColorOrderBGR,	// colorOrder
                                                     MemoryAccessControlNormalOrder);	// horizontalRefreshOrder
 
   lcdPortraitMirrorConfig = lcdBuildMemoryAccessControlConfig(
-		  	  	  	  	  	    MemoryAccessControlReverseOrder,	// rowAddressOrder
-		                                            MemoryAccessControlNormalOrder,		// columnAddressOrder
-		                                            MemoryAccessControlNormalOrder,		// rowColumnExchange
-		                                            MemoryAccessControlNormalOrder,		// verticalRefreshOrder
-		                                            MemoryAccessControlColorOrderBGR,	// colorOrder
-		                                            MemoryAccessControlNormalOrder);	// horizontalRefreshOrder
+						    MemoryAccessControlReverseOrder,	// rowAddressOrder
+		                                    MemoryAccessControlNormalOrder,	// columnAddressOrder
+		                                    MemoryAccessControlNormalOrder,	// rowColumnExchange
+		                                    MemoryAccessControlNormalOrder,	// verticalRefreshOrder
+		                                    MemoryAccessControlColorOrderBGR,	// colorOrder
+		                                    MemoryAccessControlNormalOrder);	// horizontalRefreshOrder
 
   lcdLandscapeMirrorConfig = lcdBuildMemoryAccessControlConfig(
                                                     MemoryAccessControlReverseOrder,	// rowAddressOrder
                                                     MemoryAccessControlReverseOrder,	// columnAddressOrder
                                                     MemoryAccessControlReverseOrder,	// rowColumnExchange
-                                                    MemoryAccessControlNormalOrder,		// verticalRefreshOrder
+                                                    MemoryAccessControlNormalOrder,	// verticalRefreshOrder
                                                     MemoryAccessControlColorOrderBGR,	// colorOrder
                                                     MemoryAccessControlNormalOrder);	// horizontalRefreshOrder
 
@@ -94,9 +94,7 @@ void lcdInit(void)
 
   lcdWriteCommand(0xE8);
   lcdWriteData(0x85);
-    //lcdWriteData(0x01);
   lcdWriteData(0x00);
-    //lcdWriteData(0x79);
   lcdWriteData(0x78);
 
   lcdWriteCommand(0xCB);
@@ -134,7 +132,6 @@ void lcdInit(void)
 
   lcdWriteCommand(ILI9341_FRAMECONTROLNORMAL);
   lcdWriteData(0x00);
-    //lcdWriteData(0x1B);
   lcdWriteData(0x18);
 
   lcdWriteCommand(0xF2);
@@ -227,6 +224,8 @@ void lcdTest(void)
 	}
 }
 
+// Fill screen a color
+
 void lcdFillRGB(uint16_t color)
 {
   lcdSetWindow(0, 0, lcdProperties.width - 1, lcdProperties.height - 1);
@@ -238,7 +237,7 @@ void lcdFillRGB(uint16_t color)
 }
 
 /**
- * \brief Draws a point at the specified coordinates
+ * Draws a point at the specified coordinates
  *
  * \param x        x-Coordinate
  * \param y        y-Coordinate
@@ -248,14 +247,13 @@ void lcdFillRGB(uint16_t color)
  */
 void lcdDrawPixel(uint16_t x, uint16_t y, uint16_t color)
 {
-    // Clip
     if ((x < 0) || (y < 0) || (x >= lcdProperties.width) || (y >= lcdProperties.height))
         return;
 
     lcdSetWindow(x, y, x, y);
     lcdWriteData(color);
 }
-
+// Draw horizontal line
 void lcdDrawHLine(uint16_t x0, uint16_t x1, uint16_t y, uint16_t color)
 {
   // Allows for slightly better performance than setting individual pixels
@@ -284,7 +282,7 @@ void lcdDrawHLine(uint16_t x0, uint16_t x1, uint16_t y, uint16_t color)
 		lcdWriteData(color);
 	}
 }
-
+// Draw vertical line
 void lcdDrawVLine(uint16_t x, uint16_t y0, uint16_t y1, uint16_t color)
 {
   if (y1 < y0)
@@ -328,8 +326,6 @@ void lcdDrawVLine(uint16_t x, uint16_t y0, uint16_t y1, uint16_t color)
  */
 void lcdDrawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color)
 {
-	// Bresenham's algorithm - thx wikpedia
-
 	int16_t steep = abs(y2 - y1) > abs(x2 - x1);
 	if (steep)
 	{
@@ -784,32 +780,27 @@ void lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t
 			((y + lcdFont.pFont->Height) < 0))  // Clip top
 		return;
 
-	uint8_t fontCoeff = lcdFont.pFont->Height / 8;
+	uint8_t byte_count = 1 + lcdFont.pFont->Width / 8;
 	uint8_t xP = 0;
 	for(uint8_t i = 0; i < lcdFont.pFont->Height; i++)
 	{
 		uint8_t line;
-
-		for(uint8_t k = 0; k < fontCoeff; k++)
+		for(uint8_t k = 0; k < byte_count; k++)
 		{
-			line = lcdFont.pFont->table[((c - 0x20) * lcdFont.pFont->Height * fontCoeff) + (i * fontCoeff) + k];
+			uint16_t lcd_data[8] = {bg};
+			line = lcdFont.pFont->table[((c - 0x20) * lcdFont.pFont->Height * byte_count) + (i * byte_count) + k];
 
 			for(uint8_t j = 0; j < 8; j++)
 			{
 				if((line & 0x80) == 0x80)
 				{
-					lcdDrawPixel(x + j + xP, y + i, color);
-				}
-				else if (bg != color)
-				{
-					lcdDrawPixel(x + j + xP, y + i, bg);
+					lcd_data[j] = color;
 				}
 				line <<= 1;
 			}
-
+			lcdDrawPixels(x + xP, y + i, lcd_data, 8);
 			xP += 8;
 		}
-
 		xP = 0;
 	}
 }
@@ -1104,20 +1095,6 @@ static void lcdDrawPixels(uint16_t x, uint16_t y, uint16_t *data, uint32_t dataL
   }
   while (i < dataLength);
 
-}
-
-static void lcdDrawPixels(uint16_t x, uint16_t y, uint16_t *data)
-{
-  uint32_t i = 0;
-
-  lcdSetWindow(x, y, lcdProperties.width - 1, lcdProperties.height - 1);
-
-  do
-  {
-    lcdWriteData(data[i++]);
-  }
-
-  while(i < sizeof(*data)/ sizeof(data[1]));
 }
 
 static void lcdReset(void)
