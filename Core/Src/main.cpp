@@ -126,10 +126,10 @@ int main(void)
    HAL_Delay(100);
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
-   lcdSetTextFont(&Font_verdana_8);
+   lcdSetTextFont(&Font_verdana_10);
        lcdSetCursor(10,20);
        lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
-       lcdPrintf("CALIBRATION!");
+       lcdPrintf("CALIBRATE! \n Touch and move pen \n from  upper right \n to down left\n screens corner few time");
        while(! TP_Touchpad_Pressed());
        TP_calibration();
    lcdFillRGB(COLOR_BLACK);
@@ -149,7 +149,7 @@ bool refil = false;
 	  uint16_t Coord[4] ={0};
 	  refil = true;
 	  TP_Read_Coordinates(Coord);
-      		lcdSetTextFont(&Font16);
+      		lcdSetTextFont(&Font_verdana_10);
       	      	lcdSetCursor(1 , 1);
       	      	lcdSetTextColor(COLOR_GREENYELLOW, COLOR_BLACK);
       	      	lcdPrintf("PEN: X %5i Y %5i\n \t X %5i Y %5i", Coord[0], Coord[1], Coord[2], Coord[3]);
@@ -161,7 +161,7 @@ bool refil = false;
 	  }
       }
     unsigned long t = testText();
-    lcdSetTextFont(&Font16);
+    lcdSetTextFont(&Font_verdana_10);
     lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 2);
     lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
     lcdPrintf("Time: %4lu ms", t);
@@ -232,7 +232,7 @@ void demoLCD(int i)
 	lcdSetOrientation((lcdOrientationTypeDef)i);
 	uint16_t _delay = 200;
 	uint32_t t = testFillScreen();
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", t);
@@ -240,80 +240,80 @@ void demoLCD(int i)
 
 	t = HAL_GetTick();
 	lcdTest();
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", HAL_GetTick() - t);
 	HAL_Delay(_delay);
 
 	t = testText();
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", t);
 	HAL_Delay(_delay*10);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testLines(COLOR_CYAN));
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testFastLines(COLOR_RED, COLOR_BLUE));
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testRects(COLOR_GREEN));
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testFilledRects(COLOR_YELLOW, COLOR_MAGENTA));
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testFilledCircles(10, COLOR_MAGENTA));
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testCircles(10, COLOR_WHITE));
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testTriangles());
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testFilledTriangles());
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testRoundRects());
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testFilledRoundRects());
 	HAL_Delay(_delay);
 
-	lcdSetTextFont(&Font16);
+	lcdSetTextFont(&Font_verdana_10);
 	lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("Time: %4lu ms", testDrawImage());
@@ -327,7 +327,7 @@ unsigned long testFillScreen()
 	lcdFillRGB(COLOR_BLACK);
 	t += HAL_GetTick() - start;
 	lcdSetCursor(0, 0);
-	lcdSetTextFont(&Font24);
+	lcdSetTextFont(&Font_verdana_14);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("BLACK");
 	HAL_Delay(blink_time);
@@ -335,7 +335,7 @@ unsigned long testFillScreen()
 	lcdFillRGB(COLOR_RED);
 	t += HAL_GetTick() - start;
 	lcdSetCursor(0, 0);
-	lcdSetTextFont(&Font24);
+	lcdSetTextFont(&Font_verdana_14);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("RED");
 	HAL_Delay(blink_time);
@@ -343,7 +343,7 @@ unsigned long testFillScreen()
 	lcdFillRGB(COLOR_GREEN);
 	t += HAL_GetTick() - start;
 	lcdSetCursor(0, 0);
-	lcdSetTextFont(&Font24);
+	lcdSetTextFont(&Font_verdana_14);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("GREEN");
 	HAL_Delay(blink_time);
@@ -351,7 +351,7 @@ unsigned long testFillScreen()
 	lcdFillRGB(COLOR_BLUE);
 	t += HAL_GetTick() - start;
 	lcdSetCursor(0, 0);
-	lcdSetTextFont(&Font24);
+	lcdSetTextFont(&Font_verdana_14);
 	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
 	lcdPrintf("BLUE");
 	HAL_Delay(blink_time);
@@ -363,15 +363,15 @@ unsigned long testFillScreen()
 unsigned long testText()
 {
 	unsigned long start = HAL_GetTick();
-	lcdSetCursor(1, 80);
-	lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
-	lcdSetTextFont(&Font_verdana_8);
-	lcdPrintf("Кириллица: ПРИВЕД Медвед!   \n");
 	HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
 	lcdSetCursor(50, 60);
 	lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
-	lcdSetTextFont(&Font24);
+	lcdSetTextFont(&Font_verdana_14);
 	lcdPrintf("%02i : %02i : %02i ", time.Hours, time.Minutes, time.Seconds);
+		lcdSetCursor(0, 90);
+		lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
+		lcdSetTextFont(&Font_verdana_10);
+		lcdPrintf("\t Monospace font type \n \t \texample: \n\n\t!@#$%^&,.-+=<>? \n\t 1234567890\n  Hello! It's monospace font example for STM32 MCU ");
 	return HAL_GetTick() - start;
 }
 

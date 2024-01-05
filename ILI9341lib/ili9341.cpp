@@ -20,7 +20,7 @@ enum {
 } MemoryAccessControlColorOrder;
 
 static lcdPropertiesTypeDef  lcdProperties = { ILI9341_PIXEL_WIDTH, ILI9341_PIXEL_HEIGHT, LCD_ORIENTATION_PORTRAIT,true, true };
-static lcdFontPropTypeDef lcdFont = {COLOR_YELLOW, COLOR_BLACK, &Font12, 1};
+static lcdFontPropTypeDef lcdFont = {COLOR_YELLOW, COLOR_BLACK, &Font_verdana_8, 1};
 static lcdCursorPosTypeDef cursorXY = {0, 0};
 
 static unsigned char lcdPortraitConfig = 0;
@@ -772,39 +772,48 @@ void lcdHome(void)
  *
  * \return void
  */
-void lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg)
+uint16_t lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg)
 {
-	if ((x + lcdFont.pFont->Width >= lcdProperties.width) || 		// Clip right
+  uint16_t incrX = 0; 								// width of char symbol
+  if ((x + lcdFont.pFont->Width >= lcdProperties.width) || 			// Clip right
 	    (y + lcdFont.pFont->Height >= lcdProperties.height) || 		// Clip bottom
 	    (x  < 0) || 							// Clip left
 	    (y < 0))  								// Clip top
 	{
-	    return;
+	    return incrX;
 	}
 //--------------------------------------------- output procedure for monospace char------------------------------------------------
 	if (lcdFont.pFont->Monospace)
 	{
-
+	    incrX = lcdFont.pFont->Width;
 	    uint8_t byte_count = 1 + lcdFont.pFont->Width / 8;
 	    uint8_t xP = 0;
 	    for(uint8_t i = 0; i < lcdFont.pFont->Height; i++)
 	      {
+		  uint16_t bit_count = lcdFont.pFont->Width;
 		  uint8_t line;
 		  for(uint8_t k = 0; k < byte_count; k++)
 		    {
 			uint16_t lcd_data[8] = {bg};
 			line = lcdFont.pFont->table[((c - 0x20) * lcdFont.pFont->Height * byte_count) + (i * byte_count) + k];
-
+			uint8_t type_pixels = 0;
 			for(uint8_t j = 0; j < 8; j++)
 			{
-				if((line & 0x80) == 0x80)
+			    if (bit_count)
+			      {
+				//if((line & 0x80) == 0x80)
+				if((line & 0x01) == 0x01)
 				{
 					lcd_data[j] = color;
 				}
-				line <<= 1;
+				//line <<= 1;
+				line >>= 1;
+				-- bit_count;
+				++ type_pixels;
+			      } else break;
 			}
-			lcdDrawPixels(x + xP, y + i, lcd_data, 8);
-			xP += 8;
+			lcdDrawPixels(x + xP, y + i, lcd_data, type_pixels);
+			xP += type_pixels;
 		    }
 		xP = 0;
 	      }
@@ -812,8 +821,9 @@ void lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t
 	} else
 	  {
 
-	      return;
+	      return incrX;
 	  }
+	return incrX;
 }
 
 /**
@@ -824,9 +834,9 @@ void lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t
  *
  * \return void
  */
-void lcdPrintf(const char *fmt, ...)
+void lcdPrintf(const char* fmt, ...)
 {
-	static char buf[256];
+	static  char buf[256];
 
 	char *p;
 	va_list lst;
@@ -836,10 +846,6 @@ void lcdPrintf(const char *fmt, ...)
 	va_end(lst);
 
 	p = buf;
-	char debug0 = buf[0];
-	char debug1 = buf[1];
-	char debug2 = buf[2];
-	char debug3 = buf[3];
 	while (*p)
 	{
 		if (*p == '\n')
@@ -857,8 +863,8 @@ void lcdPrintf(const char *fmt, ...)
 		}
 		else
 		{
-			lcdDrawChar(cursorXY.x, cursorXY.y, *p, lcdFont.TextColor, lcdFont.BackColor);
-			cursorXY.x += lcdFont.pFont->Width;
+			uint16_t stepX = lcdDrawChar(cursorXY.x, cursorXY.y, *p, lcdFont.TextColor, lcdFont.BackColor);
+			cursorXY.x += (++ stepX);										// move cursor to width of symbol +  1
 			if (lcdFont.TextWrap && (cursorXY.x > (lcdProperties.width - lcdFont.pFont->Width)))
 			{
 				cursorXY.y += lcdFont.pFont->Height;
