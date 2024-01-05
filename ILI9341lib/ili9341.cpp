@@ -763,9 +763,9 @@ void lcdHome(void)
 /**
  * \brief Draws a character at the specified coordinates
  *
- * \param x			The x-coordinate
- * \param y			The y-coordinate
- * \param c			Character
+ * \param x		The x-coordinate
+ * \param y		The y-coordinate
+ * \param c		Character
  * \param color		Character color
  * \param bg		Background color
  * \param size		Character Size
@@ -774,19 +774,24 @@ void lcdHome(void)
  */
 void lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg)
 {
-	if ((x >= lcdProperties.width) || 			// Clip right
-			(y >= lcdProperties.height) || 		// Clip bottom
-			((x + lcdFont.pFont->Width) < 0) || // Clip left
-			((y + lcdFont.pFont->Height) < 0))  // Clip top
-		return;
-
-	uint8_t byte_count = 1 + lcdFont.pFont->Width / 8;
-	uint8_t xP = 0;
-	for(uint8_t i = 0; i < lcdFont.pFont->Height; i++)
+	if ((x + lcdFont.pFont->Width >= lcdProperties.width) || 		// Clip right
+	    (y + lcdFont.pFont->Height >= lcdProperties.height) || 		// Clip bottom
+	    (x  < 0) || 							// Clip left
+	    (y < 0))  								// Clip top
 	{
-		uint8_t line;
-		for(uint8_t k = 0; k < byte_count; k++)
-		{
+	    return;
+	}
+//--------------------------------------------- output procedure for monospace char------------------------------------------------
+	if (lcdFont.pFont->Monospace)
+	{
+
+	    uint8_t byte_count = 1 + lcdFont.pFont->Width / 8;
+	    uint8_t xP = 0;
+	    for(uint8_t i = 0; i < lcdFont.pFont->Height; i++)
+	      {
+		  uint8_t line;
+		  for(uint8_t k = 0; k < byte_count; k++)
+		    {
 			uint16_t lcd_data[8] = {bg};
 			line = lcdFont.pFont->table[((c - 0x20) * lcdFont.pFont->Height * byte_count) + (i * byte_count) + k];
 
@@ -800,9 +805,15 @@ void lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t
 			}
 			lcdDrawPixels(x + xP, y + i, lcd_data, 8);
 			xP += 8;
-		}
+		    }
 		xP = 0;
-	}
+	      }
+	    //--------------------------------------------- output procedure for not monospace char------------------------------------------------
+	} else
+	  {
+
+	      return;
+	  }
 }
 
 /**
@@ -825,6 +836,10 @@ void lcdPrintf(const char *fmt, ...)
 	va_end(lst);
 
 	p = buf;
+	char debug0 = buf[0];
+	char debug1 = buf[1];
+	char debug2 = buf[2];
+	char debug3 = buf[3];
 	while (*p)
 	{
 		if (*p == '\n')

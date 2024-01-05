@@ -1803,6 +1803,7 @@ sFONT Font16 = {
   Font16_Table,
   11, /* Width */
   16, /* Height */
+  1, /* Monospace */
 };
 
 /**

@@ -2559,6 +2559,7 @@ sFONT Font24 = {
   Font24_Table,
   17, /* Width */
   24, /* Height */
+  1, /* Monospace */
 };
 
 /**

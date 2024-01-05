@@ -126,7 +126,7 @@ int main(void)
    HAL_Delay(100);
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
-   lcdSetTextFont(&Font24);
+   lcdSetTextFont(&Font_verdana_8);
        lcdSetCursor(10,20);
        lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
        lcdPrintf("CALIBRATION!");
@@ -162,7 +162,7 @@ bool refil = false;
       }
     unsigned long t = testText();
     lcdSetTextFont(&Font16);
-    lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 1);
+    lcdSetCursor(0, lcdGetHeight() - lcdGetTextFont()->Height - 2);
     lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
     lcdPrintf("Time: %4lu ms", t);
       		// HAL_Delay(_delay);
@@ -363,32 +363,15 @@ unsigned long testFillScreen()
 unsigned long testText()
 {
 	unsigned long start = HAL_GetTick();
-	//lcdFillRGB(COLOR_BLACK);
+	lcdSetCursor(1, 80);
+	lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
+	lcdSetTextFont(&Font_verdana_8);
+	lcdPrintf("Кириллица: ПРИВЕД Медвед!   \n");
 	HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
 	lcdSetCursor(50, 60);
-//	lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
-//	lcdSetTextFont(&Font16);
-//	lcdPrintf("Hello World!\r\n\n\n");
 	lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
 	lcdSetTextFont(&Font24);
 	lcdPrintf("%02i : %02i : %02i ", time.Hours, time.Minutes, time.Seconds);
-//	lcdSetTextColor(COLOR_RED, COLOR_BLACK);
-//	lcdSetTextFont(&Font16);
-//	lcdPrintf("%#X\r\n", 0xDEADBEEF);
-//	lcdPrintf("\r\n");
-//	lcdSetTextColor(COLOR_GREEN, COLOR_BLACK);
-//	lcdSetTextFont(&Font20);
-//	lcdPrintf("Groop\r\n");
-//	lcdSetTextFont(&Font12);
-//	lcdPrintf("I implore thee,\r\n");
-//	lcdSetTextFont(&Font12);
-//	lcdPrintf("It's test.\r\n");
-//	lcdPrintf("And more test\r\n");
-//	lcdPrintf("O, HO, HO! \r\n");
-//	lcdPrintf("Furry cat coming\r\n");
-//	lcdPrintf("Miauuuu!\r\n");
-//	lcdPrintf("MUUUURRRRR,\r\n");
-//	lcdPrintf("murrr\r\n");
 	return HAL_GetTick() - start;
 }
 

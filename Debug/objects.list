@@ -42,6 +42,7 @@
 "./ILI9341lib/font24.o"
 "./ILI9341lib/font8.o"
 "./ILI9341lib/ili9341.o"
+"./ILI9341lib/verdana_8_font.o"
 "./Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src/usbd_cdc.o"
 "./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_core.o"
 "./Middlewares/ST/STM32_USB_Device_Library/Core/Src/usbd_ctlreq.o"
