@@ -1,17 +1,17 @@
 ../Core/Src/main.cpp:87:5:int main()	4
-../Core/Src/main.cpp:185:6:void SystemClock_Config()	3
-../Core/Src/main.cpp:229:6:void demoLCD(int)	1
-../Core/Src/main.cpp:323:15:long unsigned int testFillScreen()	1
-../Core/Src/main.cpp:363:15:long unsigned int testText()	1
-../Core/Src/main.cpp:378:15:long unsigned int testLines(uint16_t)	9
-../Core/Src/main.cpp:438:15:long unsigned int testFastLines(uint16_t, uint16_t)	3
-../Core/Src/main.cpp:451:15:long unsigned int testRects(uint16_t)	3
-../Core/Src/main.cpp:470:15:long unsigned int testFilledRects(uint16_t, uint16_t)	3
-../Core/Src/main.cpp:493:15:long unsigned int testFilledCircles(uint8_t, uint16_t)	3
-../Core/Src/main.cpp:511:15:long unsigned int testCircles(uint8_t, uint16_t)	3
-../Core/Src/main.cpp:532:15:long unsigned int testTriangles()	3
-../Core/Src/main.cpp:553:15:long unsigned int testFilledTriangles()	3
-../Core/Src/main.cpp:571:15:long unsigned int testRoundRects()	3
-../Core/Src/main.cpp:590:15:long unsigned int testFilledRoundRects()	4
-../Core/Src/main.cpp:608:15:long unsigned int testDrawImage()	4
-../Core/Src/main.cpp:631:6:void Error_Handler()	1
+../Core/Src/main.cpp:189:6:void SystemClock_Config()	3
+../Core/Src/main.cpp:233:6:void demoLCD(int)	1
+../Core/Src/main.cpp:327:15:long unsigned int testFillScreen()	1
+../Core/Src/main.cpp:367:15:long unsigned int testText()	1
+../Core/Src/main.cpp:384:15:long unsigned int testLines(uint16_t)	9
+../Core/Src/main.cpp:444:15:long unsigned int testFastLines(uint16_t, uint16_t)	3
+../Core/Src/main.cpp:457:15:long unsigned int testRects(uint16_t)	3
+../Core/Src/main.cpp:476:15:long unsigned int testFilledRects(uint16_t, uint16_t)	3
+../Core/Src/main.cpp:499:15:long unsigned int testFilledCircles(uint8_t, uint16_t)	3
+../Core/Src/main.cpp:517:15:long unsigned int testCircles(uint8_t, uint16_t)	3
+../Core/Src/main.cpp:538:15:long unsigned int testTriangles()	3
+../Core/Src/main.cpp:559:15:long unsigned int testFilledTriangles()	3
+../Core/Src/main.cpp:577:15:long unsigned int testRoundRects()	3
+../Core/Src/main.cpp:596:15:long unsigned int testFilledRoundRects()	4
+../Core/Src/main.cpp:614:15:long unsigned int testDrawImage()	4
+../Core/Src/main.cpp:637:6:void Error_Handler()	1

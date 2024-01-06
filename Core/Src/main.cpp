@@ -126,7 +126,11 @@ int main(void)
    HAL_Delay(100);
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
+   unsigned char Str[] = "Привет!";
    lcdSetTextFont(&Font_verdana_10);
+       lcdSetCursor(2,2);
+       lcdPrintText(Str, 7, COLOR_GREEN, COLOR_DARKCYAN);
+       HAL_Delay(2000);
        lcdSetCursor(10,20);
        lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
        lcdPrintf("CALIBRATE! \n Touch and move pen \n from  upper right \n to down left\n screens corner few time");
@@ -368,10 +372,12 @@ unsigned long testText()
 	lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
 	lcdSetTextFont(&Font_verdana_14);
 	lcdPrintf("%02i : %02i : %02i ", time.Hours, time.Minutes, time.Seconds);
-		lcdSetCursor(0, 90);
+		lcdSetCursor(0, 86);
 		lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
 		lcdSetTextFont(&Font_verdana_10);
-		lcdPrintf("\t Monospace font type \n \t \texample: \n\n\t!@#$%^&,.-+=<>? \n\t 1234567890\n  Hello! It's monospace font example for STM32 MCU ");
+		lcdPrintf("\t Monospace font type \n \t \texample: \n\n\t!@#$%^&,.-+=<>? \n\t 1234567890\n  Hello!\n" );
+		unsigned char Str1[] ="Кириллический шрифт\n и Latinic";
+		lcdPrintText(Str1, 30, COLOR_GREENYELLOW, COLOR_DARKCYAN);
 	return HAL_GetTick() - start;
 }
 
