@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
+#include "string.h"
 #include "ili9341.h"
 
 enum {
@@ -848,48 +849,67 @@ void lcdPrintf(const char* fmt, ...)
 	p = buf;
 	while (*p)
 	{
+	  char to_print = *p;
+	    	if (to_print > 0x7f) // no ASCII symbol
+	    	{
+	    	    switch(to_print)
+	    	    {
+	         	case 0xD0 :
+	         	  ++p;
+	         	  to_print = *p + 0x30;
+	         	  break;
 
-		if (*p == '\n')
-		{
-			cursorXY.y += lcdFont.pFont->Height + 1;
-			cursorXY.x = 0;
-		}
-		else if (*p == '\r')
-		{
-			// skip em
-		}
-		else if (*p == '\t')
-		{
-			cursorXY.x += lcdFont.pFont->Width * 4;
-		}
-		else
-		{
-			uint16_t stepX = lcdDrawChar(cursorXY.x, cursorXY.y, *p, lcdFont.TextColor, lcdFont.BackColor);
-			cursorXY.x += (++ stepX);										// move cursor to width of symbol +  1
-			if (lcdFont.TextWrap && (cursorXY.x > (lcdProperties.width - lcdFont.pFont->Width)))
-			{
-				cursorXY.y += lcdFont.pFont->Height;
-				cursorXY.x = 0;
-			}
-		}
-		p++;
+	         	case 0xD1 :
+	         	  ++p;
+	         	  to_print = *p + 0x70;
+	         	  break;
 
-		if (cursorXY.y >= lcdProperties.height)
-		{
-			cursorXY.y = 0;
-		}
+	         	default :       // no 0x80---0xBF symbol  print space
+	         	  ++p;
+	         	  to_print = ' ';
+	    	    }
+	         }
+	      	if (to_print == '\n')
+	      	{
+	      	    cursorXY.y += lcdFont.pFont->Height + 1;
+	      	    cursorXY.x = 0;
+	      	}
+	      	else if (to_print == '\r')
+	      	{
+	      			// skip em
+	      	}
+	      	else if (to_print == '\t')
+	      	{
+	      	    cursorXY.x += lcdFont.pFont->Width * 4;
+	      	}
+	      	else
+	      	{
+	      		uint16_t stepX = lcdDrawChar(cursorXY.x, cursorXY.y, to_print, lcdFont.TextColor, lcdFont.BackColor);
+	      		cursorXY.x += (++ stepX);										// move cursor to width of symbol +  1
+	      		if (lcdFont.TextWrap && (cursorXY.x > (lcdProperties.width - lcdFont.pFont->Width)))
+	      		{
+	      		    cursorXY.y += lcdFont.pFont->Height;
+	      		    cursorXY.x = 0;
+	      		}
+	      	}
+	      	p++;
+
+	      	if (cursorXY.y >= lcdProperties.height)
+	      	{
+	      	    cursorXY.y = 0;
+	      	}
+
 	}
-
 }
 
 /**
  * \brief Print CP1250 string
  */
-void lcdPrintText(const unsigned char* str, uint8_t str_size, uint16_t color, uint16_t bg )
+void lcdPrintText(const char* str, uint8_t str_size, uint16_t color, uint16_t bg )
 {
   lcdFont.BackColor = bg;
   lcdFont.TextColor = color;
-  const unsigned char* p = str;
+  const char* p = str;
   unsigned char to_print;
   while (str_size)
   	{

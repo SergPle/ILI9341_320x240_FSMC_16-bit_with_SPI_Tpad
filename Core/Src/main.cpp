@@ -126,14 +126,14 @@ int main(void)
    HAL_Delay(100);
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
-   unsigned char Str[] = "Привет!";
+   char Str[] = "Привет!";
    lcdSetTextFont(&Font_verdana_10);
        lcdSetCursor(2,2);
        lcdPrintText(Str, 7, COLOR_GREEN, COLOR_DARKCYAN);
        HAL_Delay(2000);
-       lcdSetCursor(10,20);
+       lcdSetCursor(1,20);
        lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
-       lcdPrintf("CALIBRATE! \n Touch and move pen \n from  upper right \n to down left\n screens corner few time");
+       lcdPrintf("CALIBRATE! \n Перемешайте стилус по экрану \n from  upper right \n to down left\n screens corner few time");
        while(! TP_Touchpad_Pressed());
        TP_calibration();
    lcdFillRGB(COLOR_BLACK);
@@ -376,7 +376,7 @@ unsigned long testText()
 		lcdSetTextColor(COLOR_YELLOW, COLOR_BLACK);
 		lcdSetTextFont(&Font_verdana_10);
 		lcdPrintf("\t Monospace font type \n \t \texample: \n\n\t!@#$%^&,.-+=<>? \n\t 1234567890\n  Hello!\n" );
-		unsigned char Str1[] ="Кириллический шрифт\n и Latinic";
+		char Str1[] ="Кириллический шрифт\n и Latinic";
 		lcdPrintText(Str1, 30, COLOR_GREENYELLOW, COLOR_DARKCYAN);
 	return HAL_GetTick() - start;
 }

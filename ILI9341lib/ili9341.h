@@ -101,7 +101,7 @@ void					lcdDrawImage(uint16_t x, uint16_t y, GUI_CONST_STORAGE GUI_BITMAP* pBit
 void              			lcdHome(void);
 uint16_t 				lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint16_t bg);
 void					lcdPrintf(const char* fmt, ...);
-void 					lcdPrintText(const unsigned char* str, uint8_t str_size, uint16_t color, uint16_t bg );
+void 					lcdPrintText(const char* str, uint8_t str_size, uint16_t color, uint16_t bg );
 void					lcdSetTextFont(sFONT* font);
 void					lcdSetTextColor(uint16_t c, uint16_t b);
 void					lcdSetTextWrap(uint8_t w);
