@@ -5,9 +5,6 @@
 // Кодовая страница         1251 (ANSI - кириллица)
 // https://gitlab.com/riva-lab/matrixFont 
 
-#ifndef FONT_ARIAL_8_H
-#define FONT_ARIAL_8_H
-
 #include "fonts.h"
 #ifndef FONT_TYPE_MONOSPACED
 #define FONT_TYPE_MONOSPACED        0
@@ -265,11 +262,10 @@ const unsigned char  font_arial_8[FONT_ARIAL_8_ARRAY_LENGTH] =
       4, /*N*/ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0E, 0x00, 0x09, 0x00, 0x09, 0x00, 0x0E, 0x00, 0x09, 0x00, 0x09, 0x00, 0x00, 0x00  // Символ 255 <я> 
 };
 
-sFONT font_arial_8 = {
+sFONT Font_arial_8 = {
       font_arial_8,
       10, /* Width */
       11, /* Height */
       0, /* Monospace */
 };
 
-#endif // FONT_ARIAL_8_H 

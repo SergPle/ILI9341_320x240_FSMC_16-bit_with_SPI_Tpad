@@ -5,8 +5,6 @@
 // Кодовая страница         1251 (ANSI - кириллица)
 // https://gitlab.com/riva-lab/matrixFont 
 
-#ifndef FONT_ARIAL_10_H
-#define FONT_ARIAL_10_H
 
 #include "fonts.h"
 
@@ -273,4 +271,3 @@ sFONT Font_arial_10 = {
       0, /* Monospace */
 };
 
-#endif // FONT_ARIAL_10_H 

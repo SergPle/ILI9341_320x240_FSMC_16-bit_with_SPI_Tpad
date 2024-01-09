@@ -5,9 +5,6 @@
 // Кодовая страница         1251 (ANSI - кириллица)
 // https://gitlab.com/riva-lab/matrixFont 
 
-#ifndef FONT_ARIAL_14_H
-#define FONT_ARIAL_14_H
-
 #include "fonts.h"
 #ifndef FONT_TYPE_MONOSPACED
 #define FONT_TYPE_MONOSPACED        0
@@ -272,4 +269,3 @@ sFONT Font_arial_14 = {
       0, /* Monospace */
 };
 
-#endif // FONT_ARIAL_14_H 

@@ -821,8 +821,39 @@ uint16_t lcdDrawChar(int16_t x, int16_t y, unsigned char c, uint16_t color, uint
 	}
 	else
 	  {
-	      // --- put here prop font char output procedure \/\/\/ )) ---
-	      return incrX;
+	    	    uint8_t byte_count = 1 + lcdFont.pFont->Width / 8;
+	    	    uint16_t char_base_address = ((c - 0x20) * lcdFont.pFont->Height * byte_count) + (c - 0x20);
+	    	    uint8_t char_width = lcdFont.pFont->table[char_base_address];
+	    	    incrX = char_width;
+	    	    uint8_t xP = 0;
+	    	    for(uint8_t i = 0; i < lcdFont.pFont->Height; i++)
+	    	      {
+	    		  uint16_t bit_count = char_width;
+	    		  uint8_t line;
+	    		  for(uint8_t k = 0; k < byte_count; k++)
+	    		    {
+	    			uint16_t lcd_data[8] = {bg,bg,bg,bg,bg,bg,bg,bg};
+	    			line = lcdFont.pFont->table[char_base_address + (i * byte_count) + k + 1];
+	    			uint8_t type_pixels = 0;
+	    			for(uint8_t j = 0; j < 8; j++)
+	    			{
+	    			    if (bit_count)
+	    			      {
+	    				if((line & 0x01) == 0x01)
+	    				{
+	    					lcd_data[j] = color;
+	    				}
+	    				line >>= 1;
+	    				-- bit_count;
+	    				++ type_pixels;
+	    			      }
+	    			    else break;
+	    			}
+	    			lcdDrawPixels(x + xP, y + i, lcd_data, type_pixels); // byte to byte transfer line
+	    			xP += type_pixels;
+	    		    }
+	    		xP = 0;
+	    	      }
 	  }
 	return incrX;
 }

@@ -127,13 +127,13 @@ int main(void)
   // HAL_RTC_GetTime(&hrtc, &time, RTC_HOURFORMAT_24);
    lcdFillRGB(COLOR_BLACK);
    char Str[] = "Привет!";
-   lcdSetTextFont(&Font_verdana_10);
+   lcdSetTextFont(&Font_arial_10);
        lcdSetCursor(2,2);
        lcdPrintText(Str, 7, COLOR_GREEN, COLOR_DARKCYAN);
        HAL_Delay(2000);
        lcdSetCursor(1,20);
        lcdSetTextColor(COLOR_WHITE, COLOR_BLACK);
-       lcdPrintf("CALIBRATE! \n Перемешайте стилус по экрану \n from  upper right \n to down left\n screens corner few time");
+       lcdPrintf("CALIBRATE! \n Перемешайте стилус \n  по экрану \n from  upper right \n to down left\n screens corner few time");
        while(! TP_Touchpad_Pressed());
        TP_calibration();
    lcdFillRGB(COLOR_BLACK);
