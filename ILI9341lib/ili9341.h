@@ -9,7 +9,7 @@
  *
  *  Code Based of: Andriy Honcharenko
  *  Version 1.1
- *  I made it four time faster when outputting text)) and few minor optimization
+ *  Now faster when outputting text, unicode support and few minor optimization
  */
 
 #ifndef ILI9341_H_
